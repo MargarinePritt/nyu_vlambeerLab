@@ -6,55 +6,51 @@ using UnityEngine;
 // all students: complete steps 1-6, as listed in this file
 // optional: if you have extra time, complete the "extra tasks" to do at the very bottom
 
-// STEP 1: ======================================================================================
-// put this script on a Sphere... it will move around, and drop a path of floor tiles behind it
-
 public class Pathmaker : MonoBehaviour {
 
 // STEP 2: ============================================================================================
 // translate the pseudocode below
 
 //	DECLARE CLASS MEMBER VARIABLES:
-//	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
-//	Declare a public Transform called floorPrefab, assign the prefab in inspector;
-//	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
+	private int counter=0; // counter var will track how many floor tiles I've instantiated
+	private float camX=0;
+	private float camZ=0;
+	public Transform floorPrefab;
+	public Transform pathmakerSpherePrefab;
+	public static int globalTileCount=0;
 
+    void Update () {
+		if(counter<50){
+			float randomNumber=Random.Range(0.0f,1.0f);
+			if(randomNumber<0.25f){
+				gameObject.transform.Rotate(0,90,0);
+			}
+			else if(randomNumber>= 0.25f&&randomNumber<=0.5f){
+				gameObject.transform.Rotate(0,-90,0);
+			}
+			else if(randomNumber>=0.99f&&randomNumber<=1.0f){
+				Instantiate(pathmakerSpherePrefab,transform.position,Quaternion.identity);
+			}
+			Instantiate(floorPrefab,transform.position,Quaternion.identity);
+			camX+=transform.position.x;
+			camZ+=transform.position.z;
+			globalTileCount++;
+			gameObject.transform.Translate(5,0,0);
+			counter++;
+		}
+		else{
+			Destroy(gameObject); // self destruct if I've made enough tiles already
+		}
 
-	void Update () {
-//		If counter is less than 50, then:
-//			Generate a random number from 0.0f to 1.0f;
-//			If random number is less than 0.25f, then rotate myself 90 degrees;
-//				... Else if number is 0.25f-0.5f, then rotate myself -90 degrees;
-//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at my current position;
-//			// end elseIf
+		if(globalTileCount>500){
+			Destroy(gameObject);
+		}
 
-//			Instantiate a floorPrefab clone at current position;
-//			Move forward ("forward", as in, the direction I'm currently facing) by 5 units;
-//			Increment counter;
-//		Else:
-//			Destroy my game object; 		// self destruct if I've made enough tiles already
+		Camera.main.transform.position=new Vector3(camX/globalTileCount,100,camZ/globalTileCount);
 	}
-
 } // end of class scope
 
 // MORE STEPS BELOW!!!........
-
-
-
-
-// STEP 3: =====================================================================================
-// implement, test, and stabilize the system
-
-//	IMPLEMENT AND TEST:
-//	- save your scene!!! the code could potentially be infinite / exponential, and crash Unity
-//	- put Pathmaker.cs on a sphere, configure all the prefabs in the Inspector, and test it to make sure it works
-//	STABILIZE: 
-//	- code it so that all the Pathmakers can only spawn a grand total of 500 tiles in the entire world; how would you do that?
-//          - hint 1: a "static" variable is like a global variable, there's only 1 instance of that variable shared across the entire game / all objects
-//	    - hint 2: declare a "public static int" counter, increment each time you instantiate a floor tile... like "globalTileCount++"
-//          - hint 3: if there are already too many tiles, then self-destruct without spawning new floor tiles... like "if(globalTileCount > 500)" ... "Destroy(gameObject);"
-//          - note: a static var will persist beyond scene changes! you have to reset the variable manually!
-
 
 // STEP 4: ======================================================================================
 // tune your values...
