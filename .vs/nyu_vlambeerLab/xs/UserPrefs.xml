@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{FC6A9C92-C4AC-F837-2D64-E5B951F94CA5}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Pathmaker.cs">
     <Files>
-      <File FileName="Assets/scripts/Pathmaker.cs" Line="21" Column="1" />
-      <File FileName="Assets/scripts/FloorTile.cs" Line="21" Column="33" />
-      <File FileName="Assets/scripts/GameManager.cs" Line="16" Column="13" />
+      <File FileName="Assets/scripts/Pathmaker.cs" Line="39" Column="14" />
+      <File FileName="Assets/scripts/FloorTile.cs" Line="19" Column="10" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="19" Column="41" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +11,7 @@
           <Node name="nyu_vlambeerLab" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="scripts" expanded="True">
-                <Node name="GameManager.cs" selected="True" />
+                <Node name="Pathmaker.cs" selected="True" />
               </Node>
             </Node>
           </Node>
